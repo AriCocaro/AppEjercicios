@@ -3,26 +3,29 @@ console.log(`Nombre ingresado: ${nombre}`);
 
 alert("¡Vamos, comencemos tu entrenamiento!");
 
+// Listas fijas sin length ni for
 const ejercicios = ["Sentadilla", "Press banca", "Peso muerto", "Remo"];
 const elementos = ["Barra", "Mancuernas", "Máquina", "Otro"];
 
 function ElegirEE(lista, mensaje) {
   let texto = `${mensaje}\n`;
 
-  for (let i = 0; i < lista.length; i++) {
-    texto += `${i + 1}. ${lista[i]}\n`;
-  }
+  // Armamos el texto manualmente
+  texto += `1. ${lista[0]}\n`;
+  texto += `2. ${lista[1]}\n`;
+  texto += `3. ${lista[2]}\n`;
+  texto += `4. ${lista[3]}\n`;
 
   let opcion = prompt(texto);
   let numero = parseInt(opcion);
 
-  while (isNaN(numero) || numero < 1 || numero > lista.length) {
+  // Validamos manualmente
+  while (isNaN(numero) || numero < 1 || numero > 4) {
     opcion = prompt(`Opción inválida. ${texto}`);
     numero = parseInt(opcion);
   }
 
   console.log(`${mensaje} Elegido: ${lista[numero - 1]}`);
-
   return lista[numero - 1];
 }
 
