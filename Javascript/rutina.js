@@ -1,4 +1,4 @@
-let rutinaEjercicios = document.getElementById("cart-section")
+let rutinaEjercicios = document.getElementById("EjerciciosRealizados")
 
 let cartStorage = localStorage.getItem(rutinaEjercicios)
 cartStorage = JSON.parse(cartStorage)

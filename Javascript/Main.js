@@ -32,11 +32,13 @@ let ejerciciosDeRutina = document.getElementById("ejercicios")
 let rutinaEjercicios = []
 
 function renderRutina(ejerciciosArray) {
-  ejerciciosArray.array.forEach(ejercicio => {
+  ejerciciosArray.forEach(ejercicio => {
     const card = document.createElement("div")
-    card.innerHTML = <h3> ${ejercicio.nombre}</h3>
-                     <p> ${ejercicio.peso}Kg</p>
-                    <button class="agregarEjercicio" id="${ejercicio.id}">Ya realizado</button>
+    card.innerHTML = `
+                      <h3>${ejercicio.nombre}</h3>
+                      <p>${ejercicio.peso}Kg</p>
+                      <button class="agregarEjercicio" id="${ejercicio.id}">Ya realizado</button>
+                    `;
   ejerciciosDeRutina.appendChild(card)
   })
   agregarEjercicio()
@@ -46,7 +48,7 @@ function renderRutina(ejerciciosArray) {
 renderRutina(ejercicios)
 
 function agregarEjercicio() {
-  addButton = document.querySelectorAll(".agregarEjercicio")
+ const addButton = document.querySelectorAll(".agregarEjercicio")
   addButton.forEach(button =>{
     button.onclick = (e) => {
       const ejercicioId = e.currentTarget.id
