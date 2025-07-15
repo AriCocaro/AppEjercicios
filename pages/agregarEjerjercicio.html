@@ -13,13 +13,26 @@
       MEGAGYM
     </header>
 <section class="agregarEjercicio>
-  <input class="form-control" type="text" placeholder="Nombre del ejercicio" aria-label="default input example">
-  <select class="form-select" aria-label="Default select example">
-  <option selected>Elije el grupo muscular o patron de movimiento</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
+    
+        <form id="formEjercicio">
+    <div class="mb-3">
+          <input id="inputNombre" class="form-control" type="text" placeholder="Nombre del ejercicio" required/>
+        </div>
+
+        <div class="mb-3">
+          <select id="selectGrupo" class="form-select" required>
+            <option value="" selected disabled>Selecciona grupo muscular o patrón de movimiento</option>
+            <option value="Pecho">Pecho</option>
+            <option value="Espalda">Espalda</option>
+            <option value="Piernas">Piernas</option>
+            <option value="Hombros">Hombros</option>
+            <option value="Brazos">Brazos</option>
+            <option value="Core">Core</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar ejercicio</button>
+      </form>
 </section>
     
   </body>
