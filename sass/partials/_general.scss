@@ -1,0 +1,34 @@
+@use "./variables" as vars ;
+
+header {
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  .Encabezado {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-height: 130px;
+        background-color: vars.$Negro;
+        padding: 0 20px;
+        flex-wrap: nowrap;
+
+        a {
+        display: block;
+        }
+
+        figure {
+            margin: 0;
+
+            .LogoInst {
+                    max-height: 130px;
+                    display: block;
+                    padding: 10px;
+           }
+        }
+    }
+}

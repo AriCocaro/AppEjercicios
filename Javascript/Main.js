@@ -1,67 +1,148 @@
-const ejercicios = [
-  {
-    id: 1,
-    nombre: "sentadilla",
-    peso: 20 
+document.addEventListener("DOMContentLoaded", () => {
+  // Mostrar ejercicios al cargar
+  mostrarEjerciciosEnLista();
 
-  },
-  {
-    id: 2,
-    nombre: "peso muerto",
-    peso: 40 
+  // Formulario de carga de ejercicios
+  const form = document.getElementById("formEjercicio");
+  const inputNombre = document.getElementById("inputNombre");
+  const selectGrupo = document.getElementById("selectGrupo");
 
-  },
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
 
+      const nombre = inputNombre.value.trim();
+      const grupo = selectGrupo.value;
 
-  {
-    id: 3,
-    nombre: "remo con barra",
-    peso: 20 
+      const nuevoEjercicio = new Ejercicio(generarIdUnico(), nombre, grupo);
 
-  },
-  {
-    id: 4,
-    nombre: "press plano",
-    peso: 15 
+      const ejerciciosExistentes = [
+        ...ejerciciosPredefinidos,
+        ...obtenerEjerciciosDesdeLocalStorage()
+      ];
 
+      const yaExiste = ejerciciosExistentes.some(ej =>
+        ej.nombre.toLowerCase() === nombre.toLowerCase() &&
+        ej.grupoMuscular === grupo
+      );
+
+      if (yaExiste) {
+        alert("Ya existe un ejercicio con ese nombre y grupo muscular");
+        return;
+      }
+
+      if (nuevoEjercicio.validar()) {
+        guardarEjercicioEnLocalStorage(nuevoEjercicio);
+        form.reset();
+        alert("Ejercicio guardado con éxito");
+        mostrarEjerciciosEnLista();
+      } else {
+        alert("Por favor, completá todos los campos");
+      }
+    });
   }
 
-]
+  // Buscador de ejercicios
+  const buscador = document.getElementById("buscadorEjercicios");
+  if (buscador) {
+    buscador.addEventListener("input", (e) => {
+      const texto = e.target.value.trim();
+      mostrarEjerciciosEnLista(texto);
+    });
+  }
+});
 
-let ejerciciosDeRutina = document.getElementById("ejercicios")
-let rutinaEjercicios = []
 
-function renderRutina(ejerciciosArray) {
-  ejerciciosArray.forEach(ejercicio => {
-    const card = document.createElement("div")
+// Captura y manejo del formulario
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("formEjercicio");
+  const inputNombre = document.getElementById("inputNombre");
+  const selectGrupo = document.getElementById("selectGrupo");
+
+  form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const nombre = inputNombre.value.trim();
+  const grupo = selectGrupo.value;
+
+  const nuevoEjercicio = new Ejercicio(generarIdUnico(), nombre, grupo);
+
+  // ver si esta repetido
+  const ejerciciosExistentes = [
+    ...ejerciciosPredefinidos,
+    ...obtenerEjerciciosDesdeLocalStorage()
+  ];
+
+  const yaExiste = ejerciciosExistentes.some(ej =>
+    ej.nombre.toLowerCase() === nombre.toLowerCase() &&
+    ej.grupoMuscular === grupo
+  );
+
+  if (yaExiste) {
+    alert("Ya existe un ejercicio con ese nombre y grupo muscular");
+    return;
+  }
+
+  // guardar si no esta repetido
+  if (nuevoEjercicio.validar()) {
+    guardarEjercicioEnLocalStorage(nuevoEjercicio);
+    form.reset();
+    alert("Ejercicio guardado con éxito");
+    mostrarEjerciciosEnLista();
+  } else {
+    alert("Por favor, completá todos los campos");
+  }
+    //mostrar sin actualizar
+     mostrarEjerciciosEnLista();
+  });
+});
+
+// Mostrar los ejercicios ya guardados y filtro
+function mostrarEjerciciosEnLista(filtro = "") {
+  const contenedor = document.getElementById("cardsEjercicios");
+  contenedor.innerHTML = "";
+
+  const ejerciciosGuardados = obtenerEjerciciosDesdeLocalStorage();
+  const todos = [...ejerciciosPredefinidos, ...ejerciciosGuardados];
+
+  const ejerciciosFiltrados = todos.filter(ej =>
+    ej.nombre.toLowerCase().includes(filtro.toLowerCase())
+  );
+
+  if (ejerciciosFiltrados.length === 0) {
+    contenedor.innerHTML = `<p class="text-muted">No se encontraron ejercicios con ese nombre.</p>`;
+    return;
+  }
+
+  ejerciciosFiltrados.forEach((ej) => {
+    const tipo = ej.id.startsWith("pre_") ? "Preestablecido" : "Creado por vos";
+    const color = ej.id.startsWith("pre_") ? "secondary" : "primary";
+
+    const card = document.createElement("div");
+    card.className = "col-md-4 mb-4";
+
     card.innerHTML = `
-                      <h3>${ejercicio.nombre}</h3>
-                      <p>${ejercicio.peso}Kg</p>
-                      <button class="agregarEjercicio" id="${ejercicio.id}">Ya realizado</button>
-                    `;
-  ejerciciosDeRutina.appendChild(card)
-  })
-  agregarEjercicio()
+      <div class="card border-${color} shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">${ej.nombre}</h5>
+          <p class="card-text"><strong>Grupo muscular:</strong> ${ej.grupoMuscular}</p>
+          <p class="card-text"><small class="text-muted">${tipo}</small></p>
+        </div>
+      </div>
+    `;
 
-
+    contenedor.appendChild(card);
+  });
 }
-renderRutina(ejercicios)
+//evento de filtrar 
+document.addEventListener("DOMContentLoaded", () => {
+  mostrarEjerciciosEnLista(); // Mostrar todos al inicio
 
-function agregarEjercicio() {
- const addButton = document.querySelectorAll(".agregarEjercicio")
-  addButton.forEach(button =>{
-    button.onclick = (e) => {
-      const ejercicioId = e.currentTarget.id
-      const seleccionarejercicio = ejercicios.find( ejercicio => ejercicio.id == ejercicioId)
-
-      rutinaEjercicios.push(seleccionarejercicio)
-
-
-      localStorage.setItem("rutinaEjercicios", JSON.stringify(rutinaEjercicios))
-
-
-
-    }
-
-  })
-}
+  const buscador = document.getElementById("buscadorEjercicios");
+  if (buscador) {
+    buscador.addEventListener("input", (e) => {
+      const texto = e.target.value.trim();
+      mostrarEjerciciosEnLista(texto);
+    });
+  }
+});

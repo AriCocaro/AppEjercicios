@@ -1,0 +1,31 @@
+/*Paleta de colores*/
+header {
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+header .Encabezado {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 130px;
+  background-color: black;
+  padding: 0 20px;
+  flex-wrap: nowrap;
+}
+header .Encabezado a {
+  display: block;
+}
+header .Encabezado figure {
+  margin: 0;
+}
+header .Encabezado figure .LogoInst {
+  max-height: 130px;
+  display: block;
+  padding: 10px;
+}
+
+/*# sourceMappingURL=estilo.css.map */
