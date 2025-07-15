@@ -1,3 +1,30 @@
+//Ejercicios pre-definidos
+const ejerciciosPredefinidos = [
+  {
+    id: "pre_001",
+    nombre: "Sentadillas",
+    grupoMuscular: "Piernas"
+  },
+    {
+    id: "pre_002",
+    nombre: "Isquisurales en camilla",
+    grupoMuscular: "Piernas"
+  },
+  {
+    id: "pre_003",
+    nombre: "Press plano",
+    grupoMuscular: "Pecho"
+  },
+  {
+    id: "pre_004",
+    nombre: "Remo",
+    grupoMuscular: "Espalda"
+  }
+];
+
+
+
+
 // Clase Ejercicio
 class Ejercicio {
   constructor(id, nombre, grupoMuscular) {
@@ -54,3 +81,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// Mostrar los ejercicios ya guardados 
+function mostrarEjerciciosEnLista() {
+  const contenedor = document.getElementById("cardsEjercicios");
+  contenedor.innerHTML = ""; // Limpiar antes de mostrar
+
+  const ejerciciosGuardados = obtenerEjerciciosDesdeLocalStorage();
+ const todosLosEjercicios = ejerciciosPredefinidos.concat(ejerciciosGuardados);
+
+
+  if (todosLosEjercicios.length === 0) {
+    contenedor.innerHTML = `<p class="text-muted">No hay ejercicios disponibles aún.</p>`;
+    return;
+  }
+
+  todosLosEjercicios.forEach((ej) => {
+    const card = document.createElement("div");
+    card.className = "col-md-4 mb-4";
+
+    card.innerHTML = `
+      <div class="card shadow-sm border-${ej.id.startsWith("pre_") ? 'secondary' : 'primary'}">
+        <div class="card-body">
+          <h5 class="card-title">${ej.nombre}</h5>
+          <p class="card-text"><strong>Grupo muscular:</strong> ${ej.grupoMuscular}</p>
+         </div>
+      </div>
+    `;
+
+    contenedor.appendChild(card);
+  });
+}
