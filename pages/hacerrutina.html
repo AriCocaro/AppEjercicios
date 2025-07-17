@@ -23,9 +23,50 @@
       </div>
   </header>
   <main>
-    <section>
-        
+    <section id="parametrosGenerales">
+        <h2>Datos generales</h2>
+
+        <div class="generales">
+            <label for="semanaNro">Semana: </label> <!-- enlazar a js--> 
+            <select id="semanaNro"></select>
+
+            <label for="series">Series</label>
+            <input type="number" id="series" min="1">
+
+            <label for="repeticiones">Repeticiones</label>
+            <input type="number" id="repeticiones" min="1">
+
+            <label for="descanso">Tiempo de descanso</label>
+            <input type="number" id="descanso" min="1">
+        </div>
+
     </section>
+
+    <section id="armadoDeRutina">
+        <h2>Armado de rutina</h2>
+
+        <label for="selectDia"></label>
+        <select id="selectDia"></select><!-- enlazar a js--> 
+
+        <label for="elegirEjercicio">Selector de ejercicios</label>
+        <input type="text" id="elegirEjercicio" placeholder="Buscar Ejercicio" list="listaDeEjercicios">
+        <datalist id="listaDeEjercicios"></datalist>
+
+        <ul id="ejerciciosDelDia">
+
+        </ul>
+
+    </section>
+
+    <div id="botonVP">
+        <button id="vistaFlotante" title="Mantener para vista previa">VP</button>
+
+    </div>
+    <section id="VistaPrevia">
+        <h2>Vista previa general</h2>
+        <div id="VPTodosLosDias"></div>
+    </section>
+    
 
   </main>
 </body>
