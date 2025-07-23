@@ -36,19 +36,38 @@
 
 
             <label for="semanaNro">Semana: </label> <!-- enlazar a js--> 
-            <select id="semanaNro"></select>
-
-            <label for="series">Series</label>
-            <input type="number" id="series" min="1">
-
-            <label for="repeticiones">Repeticiones</label>
-            <input type="number" id="repeticiones" min="1">
-
-            <label for="descanso">Tiempo de descanso</label>
-            <input type="number" id="descanso" min="1">
+            <input type="number"   id="semanaNro" min="1">
+            
 
             <button id="guardar">Guardar datos generales</button>
         </div>
+
+    </section>
+
+    <section id="semana">
+        <select id="selectorSemana">Semana </select>
+
+        
+        <label for="series">Series</label>
+        <input type="number" id="series" min="1">
+
+        <label for="repeticiones">Repeticiones</label>
+        <input type="number" id="repeticiones" min="1">
+
+       <label for="descanso">Tiempo de descanso</label>
+       <input type="number" id="descanso" min="1">
+
+      <table id="tablaResumen">
+         <thead>
+                <tr>
+                    <th>Semana</th>
+                    <th>Repeticiones</th>
+                    <th>Series</th>
+                    <th>Descanso</th>
+                </tr>
+         </thead>
+         <tbody></tbody>
+     </table>
 
     </section>
 
