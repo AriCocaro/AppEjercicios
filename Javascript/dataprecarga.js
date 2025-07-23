@@ -24,5 +24,6 @@ const ejerciciosPredefinidos = [
 //localstorage ejercicios guardados
 const LS_EJERCICIOS = "ejerciciosGuardados"
 
+const LS_RUTINAS = "rutinasGuardadas";
 
 

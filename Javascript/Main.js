@@ -1,4 +1,4 @@
-// crear ejercicio, que no se repita y que se vea automaticamente en card
+// crear ejercicio, que no se repita y se muestre
 
 document.addEventListener("DOMContentLoaded", () => {
   // Mostrar ejercicios al cargar
@@ -148,3 +148,66 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
+// hacer rutina
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  cargarUsuariosEnSelect();
+  cargarEjerciciosEnDatalist();
+  configurarInputEjercicio();
+});
+
+function cargarUsuariosEnSelect() {
+  const usuarios = ["juan", "ana", "lucas"];
+  const selectUsuario = document.getElementById("usuarioID");
+
+  usuarios.forEach(u => {
+    const option = document.createElement("option");
+    option.value = u;
+    option.textContent = u;
+    selectUsuario.appendChild(option);
+  });
+}
+
+function cargarEjerciciosEnDatalist() {
+  const todosLosEjercicios = [
+    ...ejerciciosPredefinidos,
+    ...obtenerEjerciciosDesdeLocalStorage()
+  ];
+
+  const datalist = document.getElementById("listaDeEjercicios");
+  datalist.innerHTML = "";
+
+  todosLosEjercicios.forEach(ej => {
+    const option = document.createElement("option");
+    option.value = ej.nombre;
+    datalist.appendChild(option);
+  });
+}
+
+function configurarInputEjercicio() {
+  const input = document.getElementById("elegirEjercicio");
+  const ul = document.getElementById("ejerciciosDelDia");
+
+  if (!input || !ul) return;
+
+  input.addEventListener("change", () => {
+    const nombre = input.value.trim();
+    if (nombre === "") return;
+
+    // Evitar repetidos en el mismo día
+    const yaExiste = Array.from(ul.children).some(li => li.textContent === nombre);
+    if (yaExiste) {
+      alert("Ese ejercicio ya fue agregado a este día.");
+      input.value = "";
+      return;
+    }
+
+    const li = document.createElement("li");
+    li.textContent = nombre;
+    ul.appendChild(li);
+    input.value = "";
+  });
+}
