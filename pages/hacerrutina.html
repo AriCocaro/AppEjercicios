@@ -8,6 +8,8 @@
     <script src="../javascript/utils.js"></script>
     <script src="../javascript/storage.js"></script>
     <script src="../javascript/ejercicios.js"></script>
+    <script src="../javascript/rutinas.js"> </script>
+    <script src="../javascript/dom.js"></script>
     <script src="../javascript/main.js" defer></script>
     <link rel="stylesheet" href="../css/estilo.css">
 
@@ -28,8 +30,10 @@
 
         <div class="generales">
 
-            <label for="usuarioID"> Usuario</label>
-            <select id="usuarioID"></select>
+            <label for="usuarioId">Usuario</label>
+            <input type="text" id="usuarioId" placeholder="Buscar por nombre o DNI" autocomplete="off" />
+            <ul id="listaUsuarios" class="dropdown-usuarios oculto"></ul>
+
 
             <label for="diasNro">Cantidad de dias</label>
             <input type="number"  id="diasNro" min="1">
@@ -102,5 +106,7 @@
     
 
   </main>
+
+
 </body>
 </html>

@@ -24,6 +24,13 @@ const ejerciciosPredefinidos = [
 //localstorage ejercicios guardados
 const LS_EJERCICIOS = "ejerciciosGuardados"
 
-const LS_RUTINAS = "rutinasGuardadas";
+// hacer rutinas // usuario
 
+const usuariosPredefinidos = [
+  { id: "12345678", nombre: "Juan", apellido: "Pérez" },
+  { id: "23456789", nombre: "Ana", apellido: "López" },
+  { id: "34567890", nombre: "Lucas", apellido: "García" }
+];
+
+const LS_USUARIOS = "usuariosGuardados"
 
