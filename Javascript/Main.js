@@ -155,3 +155,56 @@ document.addEventListener("DOMContentLoaded", () => {
 input.addEventListener("focus", () => {
   mostrarListaCompleta();
 });
+
+
+//  guardar en localstorage, todos los botones guardar y escucha a cual se clickeo 
+
+// Selecciona todos los botones
+const botones = document.querySelectorAll(".guardar-btn");
+
+// Recorres cada uno y le agregás un listener
+botones.forEach(boton => {
+  boton.addEventListener("click", (e) => {
+    // `e.currentTarget` hace referencia al botón clickeado
+    const botonClickeado = e.currentTarget;
+
+    // Por ejemplo, podés sacar un atributo personalizado
+    const id = botonClickeado.dataset.id;
+
+    // Guardás en localStorage o hacés otra acción
+    localStorage.setItem("usuarioSeleccionado", id);
+    console.log(`Guardado: ${id}`);
+  });
+});
+
+
+// elegir dia segun lo ingresado con anterioridad
+document.addEventListener("DOMContentLoaded", () => {
+  const inputDiasNro = document.getElementById("diasNro");
+  const selectDia = document.getElementById("selectDia");
+
+  inputDiasNro.addEventListener("input", () => {
+    const nroDias = parseInt(inputDiasNro.value);
+    selectDia.innerHTML = ""; // Limpiar opciones previas
+
+    if (!nroDias || nroDias < 1) return;
+
+    // Opción por defecto
+    const optionInicial = document.createElement("option");
+    optionInicial.value = "";
+    optionInicial.textContent = "Elegí el día";
+    optionInicial.disabled = true;
+    optionInicial.selected = true;
+    selectDia.appendChild(optionInicial);
+
+    for (let i = 1; i <= nroDias; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `Día ${i}`;
+      selectDia.appendChild(option);
+    }
+  });
+});
+
+
+//ejercicios por dia 

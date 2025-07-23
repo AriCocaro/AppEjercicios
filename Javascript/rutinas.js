@@ -40,3 +40,41 @@ function mostrarListaFiltrada(texto) {
 
   lista.classList.remove("oculto");
 }
+
+
+//agregar la cantidad de dias 
+document.addEventListener("DOMContentLoaded", () => {
+  const inputDiasNro = document.getElementById("diasNro");
+  const selectDia = document.getElementById("selectDia");
+
+  inputDiasNro.addEventListener("input", () => {
+    const nroDias = parseInt(inputDiasNro.value);
+    selectDia.innerHTML = ""; // Limpiar opciones previas
+
+    if (!nroDias || nroDias < 1) return;
+
+   // Opción por defecto
+   const optionInicial = document.createElement("option");
+   optionInicial.value = "";
+   optionInicial.textContent = "Elegí el día";
+   optionInicial.disabled = true;
+   optionInicial.selected = true;
+   selectDia.appendChild(optionInicial);
+
+   for (let i = 1; i <= nroDias; i++) {
+     const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `Día ${i}`;
+      selectDia.appendChild(option);
+   }
+  });
+});
+//filtro de ejercicios
+    
+
+// lógica para filtrar ejercicios según filtro de texto
+export function actualizarDatalistEjercicios(filtro, ejerciciosPredefinidos, ejerciciosGuardados) {
+  return [...ejerciciosPredefinidos, ...ejerciciosGuardados].filter(ej =>
+    ej.nombre.toLowerCase().includes(filtro.toLowerCase())
+  );
+}

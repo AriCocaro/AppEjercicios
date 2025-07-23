@@ -19,3 +19,4 @@ function obtenerUsuariosDeStorage() {
   const data = localStorage.getItem(LS_USUARIOS);
   return data ? JSON.parse(data) : [];
 }
+

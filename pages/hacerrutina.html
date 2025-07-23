@@ -39,11 +39,11 @@
             <input type="number"  id="diasNro" min="1">
 
 
-            <label for="semanaNro">Semana: </label> <!-- enlazar a js--> 
+            <label for="semanaNro">Semana: </label> 
             <input type="number"   id="semanaNro" min="1">
             
 
-            <button id="guardarDG">Guardar datos generales</button>
+            <button class="guardar" data-id="gdg">Guardar datos generales</button>
         </div>
 
     </section>
@@ -73,15 +73,16 @@
          <tbody></tbody>
      </table>
 
-       <button id="guardarS">Guardar datos generales</button>
+       <button class="guardar" data-id="gds" >Guardar semanas</button>
 
     </section>
 
     <section id="armadoDeRutina">
         <h2>Armado de rutina</h2>
 
-        <label for="selectDia"></label>
-        <select id="selectDia"></select><!-- enlazar a js--> 
+       
+        <label for="selectDia">Día</label>
+        <select id="selectDia"></select>
 
         <label for="elegirEjercicio">Selector de ejercicios</label>
         <input type="text" id="elegirEjercicio" placeholder="Buscar Ejercicio" list="listaDeEjercicios">
@@ -91,7 +92,7 @@
 
         </ul>
 
-        <button id="guardarD">Guardar dia</button>
+        <button class="guardar" data-id="gd">Guardar dia</button>
 
     </section>
 
