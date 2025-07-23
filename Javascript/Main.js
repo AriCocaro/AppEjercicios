@@ -1,3 +1,5 @@
+// crear ejercicio, que no se repita y que se vea automaticamente en card
+
 document.addEventListener("DOMContentLoaded", () => {
   // Mostrar ejercicios al cargar
   mostrarEjerciciosEnLista();
