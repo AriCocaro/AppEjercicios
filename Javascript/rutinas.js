@@ -1,18 +1,17 @@
-//USUARIO FILTRO DE USUARIOS EN HACERRUTINA
+// rutinas.js
 
-
-// Estado temporal para uso interno del sistema
+// Estado temporal para sistema (opcional)
 var rutinaTemporal = { usuarioID: null };
 
-// Función global para mostrar lista con filtro
+// Función para mostrar lista filtrada de usuarios según texto
 function mostrarListaFiltrada(texto) {
   const lista = document.getElementById("listaUsuarios");
   if (!lista) return;
 
   lista.innerHTML = "";
-
   const textoFiltrado = texto.toLowerCase();
 
+  // Usamos usuariosPredefinidos definidos en dataprecarga.js
   const resultados = usuariosPredefinidos.filter(usuario =>
     (`${usuario.nombre} ${usuario.apellido}`.toLowerCase().includes(textoFiltrado)) ||
     usuario.id.includes(textoFiltrado)
@@ -31,7 +30,7 @@ function mostrarListaFiltrada(texto) {
     li.addEventListener("click", () => {
       const input = document.getElementById("usuarioId");
       input.value = `${usuario.nombre} ${usuario.apellido}`;
-      rutinaTemporal.usuarioID = usuario.id;
+      rutinaTemporal.usuarioID = usuario.id; // Guardar ID si necesitás
       lista.classList.add("oculto");
     });
 
@@ -41,40 +40,31 @@ function mostrarListaFiltrada(texto) {
   lista.classList.remove("oculto");
 }
 
-
-//agregar la cantidad de dias 
+// Agregar cantidad de días a selector (desde input)
 document.addEventListener("DOMContentLoaded", () => {
   const inputDiasNro = document.getElementById("diasNro");
   const selectDia = document.getElementById("selectDia");
 
+  if (!inputDiasNro || !selectDia) return;
+
   inputDiasNro.addEventListener("input", () => {
     const nroDias = parseInt(inputDiasNro.value);
-    selectDia.innerHTML = ""; // Limpiar opciones previas
+    selectDia.innerHTML = "";
 
     if (!nroDias || nroDias < 1) return;
 
-   // Opción por defecto
-   const optionInicial = document.createElement("option");
-   optionInicial.value = "";
-   optionInicial.textContent = "Elegí el día";
-   optionInicial.disabled = true;
-   optionInicial.selected = true;
-   selectDia.appendChild(optionInicial);
+    const optionInicial = document.createElement("option");
+    optionInicial.value = "";
+    optionInicial.textContent = "Elegí el día";
+    optionInicial.disabled = true;
+    optionInicial.selected = true;
+    selectDia.appendChild(optionInicial);
 
-   for (let i = 1; i <= nroDias; i++) {
-     const option = document.createElement("option");
+    for (let i = 1; i <= nroDias; i++) {
+      const option = document.createElement("option");
       option.value = i;
       option.textContent = `Día ${i}`;
       selectDia.appendChild(option);
-   }
+    }
   });
 });
-//filtro de ejercicios
-    
-
-// lógica para filtrar ejercicios según filtro de texto
-export function actualizarDatalistEjercicios(filtro, ejerciciosPredefinidos, ejerciciosGuardados) {
-  return [...ejerciciosPredefinidos, ...ejerciciosGuardados].filter(ej =>
-    ej.nombre.toLowerCase().includes(filtro.toLowerCase())
-  );
-}

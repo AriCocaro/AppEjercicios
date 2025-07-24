@@ -1,3 +1,5 @@
+// dom.js
+
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("usuarioId");
   const lista = document.getElementById("listaUsuarios");
@@ -5,19 +7,20 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!input || !lista) return;
 
   input.addEventListener("focus", () => {
-    mostrarListaFiltrada("");
+    mostrarListaFiltrada(""); // Mostrar todos al hacer foco
   });
 
   input.addEventListener("input", (e) => {
-    mostrarListaFiltrada(e.target.value);
+    mostrarListaFiltrada(e.target.value); // Filtrar al escribir
   });
 
   document.addEventListener("click", (e) => {
     if (!input.contains(e.target) && !lista.contains(e.target)) {
-      lista.classList.add("oculto");
+      lista.classList.add("oculto"); // Ocultar si clic afuera
     }
   });
 });
+
 
 
 //selector de semanas segun nro de semansa ingresado antes 
