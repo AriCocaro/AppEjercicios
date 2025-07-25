@@ -1,9 +1,9 @@
-// rutinas.js
 
-// Estado temporal para sistema (opcional)
+
+// Estado temporal para sistema
 var rutinaTemporal = { usuarioID: null };
 
-// Función para mostrar lista filtrada de usuarios según texto
+//
 function mostrarListaFiltrada(texto) {
   const lista = document.getElementById("listaUsuarios");
   if (!lista) return;
@@ -11,7 +11,7 @@ function mostrarListaFiltrada(texto) {
   lista.innerHTML = "";
   const textoFiltrado = texto.toLowerCase();
 
-  // Usamos usuariosPredefinidos definidos en dataprecarga.js
+  
   const resultados = usuariosPredefinidos.filter(usuario =>
     (`${usuario.nombre} ${usuario.apellido}`.toLowerCase().includes(textoFiltrado)) ||
     usuario.id.includes(textoFiltrado)
@@ -30,7 +30,7 @@ function mostrarListaFiltrada(texto) {
     li.addEventListener("click", () => {
       const input = document.getElementById("usuarioId");
       input.value = `${usuario.nombre} ${usuario.apellido}`;
-      rutinaTemporal.usuarioID = usuario.id; // Guardar ID si necesitás
+      rutinaTemporal.usuarioID = usuario.id; 
       lista.classList.add("oculto");
     });
 
@@ -91,7 +91,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const ejercicioEncontrado = todos.find(ej => ej.nombre.toLowerCase() === nombreIngresado.toLowerCase());
 
     if (!ejercicioEncontrado) {
-      alert("El ejercicio ingresado no existe en la base.");
+      Swal.fire({
+        title: 'Ejercicio incorrecto',
+        text: 'Ingresaste un ejercicio que no se encuentra en la base de datos.',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+      });
       return;
     }
 
@@ -125,7 +130,12 @@ function agregarEjercicioALaLista(ejercicio) {
     li => li.dataset.id === ejercicio.id
   );
   if (yaExiste) {
-    alert("Ese ejercicio ya fue agregado.");
+    Swal.fire({
+      title: 'Error!',
+      text: 'Este ejercicio ya fue incluido hoy',
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    });
     return;
   }
 

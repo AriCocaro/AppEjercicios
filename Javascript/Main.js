@@ -30,17 +30,32 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
       if (yaExiste) {
-        alert("Ya existe un ejercicio con ese nombre y grupo muscular");
+        Swal.fire({
+          title: 'Ya existe un ejercicio con ese nombre',
+          text: 'Intenta con otro',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
         return;
       }
 
       if (nuevoEjercicio.validar()) {
         guardarEjercicioEnLocalStorage(nuevoEjercicio);
         form.reset();
-        alert("Ejercicio guardado con éxito");
+        Swal.fire({
+          title: 'Ejercicio guardado con éxito',
+          text: sucess,
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
         mostrarEjerciciosEnLista();
       } else {
-        alert("Por favor, completá todos los campos");
+        Swal.fire({
+        title: 'Faltan llenar campos',
+        text: 'Completa todos los campos',
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+      });
       }
     });
   }
@@ -138,3 +153,51 @@ function mostrarEjerciciosEnLista(filtro = "") {
     contenedor.appendChild(card);
   });
 }
+
+
+// guardar rutinas por usuario 
+
+document.getElementById("guardarRutina").addEventListener("click", function(e) {
+  e.preventDefault(); 
+
+  if (!rutinaTemporal.usuarioID) {
+    Swal.fire({
+      title: "Error",
+      text: "Seleccioná un usuario",
+      icon: "warning",
+    });
+    return;
+  }
+
+  
+  const rutinasGuardadas = JSON.parse(localStorage.getItem("rutinasPorUsuario")) || {};
+
+  
+  if (!rutinaTemporal.rutina) {
+    Swal.fire({
+      title: "Error",
+      text: "No hay rutina cargada para guardar",
+      icon: "warning",
+    });
+    return;
+  }
+
+  //Se inicia una rutina por usuario si no hay
+  if (!rutinasGuardadas[rutinaTemporal.usuarioID]) {
+    rutinasGuardadas[rutinaTemporal.usuarioID] = [];
+  }
+
+  
+  rutinasGuardadas[rutinaTemporal.usuarioID].push(structuredClone(rutinaTemporal.rutina));
+
+  
+  localStorage.setItem("rutinasPorUsuario", JSON.stringify(rutinasGuardadas));
+
+  Swal.fire({
+    title: "¡Listo!",
+    text: "La rutina fue guardada correctamente",
+    icon: "success",
+  });
+
+  
+});

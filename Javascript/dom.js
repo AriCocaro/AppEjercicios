@@ -208,3 +208,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const boton = document.getElementById('guardarRutina');
+  
+  if (boton) {
+    boton.addEventListener('click', () => {
+      Swal.fire({
+        title: '¡Rutina guardada!',
+        text: 'Tu rutina fue guardada correctamente.',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      }).then(result => {
+        if (result.isConfirmed) {
+          window.location.href = './instructor.html';
+        }
+      });
+    });
+  } 
+});

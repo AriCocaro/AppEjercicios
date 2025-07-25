@@ -30,7 +30,12 @@ function guardarDatosGenerales() {
   const nombreCompleto = document.getElementById("usuarioId").value.trim();
 
   if (!usuarioId || !dias || !semana || !nombreCompleto) {
-    alert("Completá todos los datos generales.");
+    Swal.fire({
+      title: 'Completá todos los datos',
+      text: 'Uno de los campos se encuentra vacío',
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    });
     return;
   }
 
@@ -62,7 +67,7 @@ function guardarDatosGenerales() {
   // Guardar en estado temporal para que las siguientes funciones sepan qué rutina se está editando
   rutinaTemporal.rutinaId = idRutina;
 
-  alert("Datos generales guardados");
+  
 }
 
 
@@ -138,7 +143,12 @@ function guardarDia() {
   const lista = document.getElementById("ejerciciosDelDia");
 
   if (!usuarioId || !rutinaId || !diaSeleccionado) {
-    alert("Seleccioná un día.");
+    Swal.fire({
+      title: 'Para continuar debes seleccionar un día',
+      text: '',
+      icon: 'Warning',
+      confirmButtonText: 'Ok'
+   });
     return;
   }
 
@@ -148,7 +158,12 @@ function guardarDia() {
   }));
 
   if (ejerciciosNuevos.length === 0) {
-    alert("Agregá al menos un ejercicio.");
+    Swal.fire({
+      title: 'Para continuar debes agregar un ejercicio.',
+      text: 'Agrega al menos un ejercicio.',
+      icon: 'error',
+      confirmButtonText: 'Ok.'
+    });
     return;
   }
 
@@ -168,7 +183,7 @@ function guardarDia() {
   // Guardar combinación final
   rutinas[usuarioId].rutinas[rutinaId].dias[diaSeleccionado] = ejerciciosCombinados;
   guardarRutinasEnStorage(rutinas);
-  alert("Ejercicios del día guardados");
+ 
 
   document.getElementById("ejerciciosDelDia").innerHTML = "";
 }
