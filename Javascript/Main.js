@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Función para mostrar ejercicios (filtrados)
+
 function mostrarEjerciciosEnLista(filtro = "") {
   const contenedor = document.getElementById("cardsEjercicios");
   if (!contenedor) return;

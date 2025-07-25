@@ -64,7 +64,7 @@ function guardarDatosGenerales() {
 
   guardarRutinasEnStorage(rutinas);
 
-  // Guardar en estado temporal para que las siguientes funciones sepan qué rutina se está editando
+  
   rutinaTemporal.rutinaId = idRutina;
 
   
@@ -82,56 +82,67 @@ function guardarSemana() {
 
   if (!usuarioId || !rutinaId) return;
 
-  const rutinas = obtenerRutinasDesdeStorage();
+  try {
+    const rutinas = obtenerRutinasDesdeStorage();
 
-  // Asegurar estructura sin romper lo anterior
-  if (!rutinas[usuarioId]) rutinas[usuarioId] = { rutinas: {} };
-  if (!rutinas[usuarioId].rutinas[rutinaId]) {
-    rutinas[usuarioId].rutinas[rutinaId] = {
-      generales: {},
-      semanas: {},
-      dias: {}
-    };
-  } else {
-    if (!rutinas[usuarioId].rutinas[rutinaId].semanas) {
-      rutinas[usuarioId].rutinas[rutinaId].semanas = {};
-    }
-  }
-
-  const semanas = rutinas[usuarioId].rutinas[rutinaId].semanas;
-
-  // 1. Guardar los datos visibles en la tabla
-  const filas = document.querySelectorAll("#tablaResumen tbody tr");
-  filas.forEach(fila => {
-    const [celdaSemana, celdaReps, celdaSeries, celdaDescanso] = fila.querySelectorAll("td");
-
-    const semana = Number(celdaSemana.textContent.trim().match(/\d+/)?.[0]);
-    const repeticionesFila = parseInt(celdaReps.textContent.trim());
-    const seriesFila = parseInt(celdaSeries.textContent.trim());
-    const descansoFila = parseInt(celdaDescanso.textContent.trim());
-
-    if (!isNaN(semana) && !isNaN(seriesFila) && !isNaN(repeticionesFila) && !isNaN(descansoFila)) {
-      semanas[semana] = {
-        series: seriesFila,
-        repeticiones: repeticionesFila,
-        descanso: descansoFila
+   
+    if (!rutinas[usuarioId]) rutinas[usuarioId] = { rutinas: {} };
+    if (!rutinas[usuarioId].rutinas[rutinaId]) {
+      rutinas[usuarioId].rutinas[rutinaId] = {
+        generales: {},
+        semanas: {},
+        dias: {}
       };
+    } else {
+      if (!rutinas[usuarioId].rutinas[rutinaId].semanas) {
+        rutinas[usuarioId].rutinas[rutinaId].semanas = {};
+      }
     }
-  });
 
-  // 2. Agregar datos del formulario si esa semana no existe aún
-  if (!isNaN(semanaSeleccionada) && !isNaN(series) && !isNaN(repeticiones) && !isNaN(descanso)) {
-    if (!semanas.hasOwnProperty(semanaSeleccionada)) {
-      semanas[semanaSeleccionada] = {
-        series,
-        repeticiones,
-        descanso
-      };
+    const semanas = rutinas[usuarioId].rutinas[rutinaId].semanas;
+
+    // Guardar los datos visibles en la tabla
+    const filas = document.querySelectorAll("#tablaResumen tbody tr");
+    filas.forEach(fila => {
+      const [celdaSemana, celdaReps, celdaSeries, celdaDescanso] = fila.querySelectorAll("td");
+
+      const semana = Number(celdaSemana.textContent.trim().match(/\d+/)?.[0]);
+      const repeticionesFila = parseInt(celdaReps.textContent.trim());
+      const seriesFila = parseInt(celdaSeries.textContent.trim());
+      const descansoFila = parseInt(celdaDescanso.textContent.trim());
+
+      if (!isNaN(semana) && !isNaN(seriesFila) && !isNaN(repeticionesFila) && !isNaN(descansoFila)) {
+        semanas[semana] = {
+          series: seriesFila,
+          repeticiones: repeticionesFila,
+          descanso: descansoFila
+        };
+      }
+    });
+
+    // Agregar datos del formulario si esa semana no existe aún
+    if (!isNaN(semanaSeleccionada) && !isNaN(series) && !isNaN(repeticiones) && !isNaN(descanso)) {
+      if (!semanas.hasOwnProperty(semanaSeleccionada)) {
+        semanas[semanaSeleccionada] = {
+          series,
+          repeticiones,
+          descanso
+        };
+      }
     }
+
+    guardarRutinasEnStorage(rutinas);
+  } catch (error) {
+    console.error("Error al guardar semana:", error);
+    Swal.fire({
+      title: 'Ocurrió un error al guardar',
+      text: error.message,
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    });
   }
-
-  guardarRutinasEnStorage(rutinas);
 }
+
 
 
 
@@ -169,10 +180,10 @@ function guardarDia() {
 
   const rutinas = obtenerRutinasDesdeStorage();
 
-  // Obtener ejercicios ya guardados (o array vacío si no hay)
+  
   const ejerciciosExistentes = rutinas[usuarioId].rutinas[rutinaId].dias[diaSeleccionado] || [];
 
-  // Combinar sin duplicados (por ID)
+  
   const ejerciciosCombinados = [...ejerciciosExistentes];
   ejerciciosNuevos.forEach(nuevo => {
     if (!ejerciciosExistentes.some(e => e.id === nuevo.id)) {
@@ -180,7 +191,7 @@ function guardarDia() {
     }
   });
 
-  // Guardar combinación final
+  
   rutinas[usuarioId].rutinas[rutinaId].dias[diaSeleccionado] = ejerciciosCombinados;
   guardarRutinasEnStorage(rutinas);
  

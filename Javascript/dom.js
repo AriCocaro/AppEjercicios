@@ -1,4 +1,4 @@
-// dom.js
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("usuarioId");
@@ -7,23 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!input || !lista) return;
 
   input.addEventListener("focus", () => {
-    mostrarListaFiltrada(""); // Mostrar todos al hacer foco
+    mostrarListaFiltrada("");
   });
 
   input.addEventListener("input", (e) => {
-    mostrarListaFiltrada(e.target.value); // Filtrar al escribir
+    mostrarListaFiltrada(e.target.value); 
   });
 
   document.addEventListener("click", (e) => {
     if (!input.contains(e.target) && !lista.contains(e.target)) {
-      lista.classList.add("oculto"); // Ocultar si clic afuera
+      lista.classList.add("oculto"); // ocular haciendo click en vp
     }
   });
 });
 
 
 
-//selector de semanas segun nro de semansa ingresado antes 
+
 document.addEventListener("DOMContentLoaded", () => {
   const inputSemanaNro = document.getElementById("semanaNro");
   const selectorSemana = document.getElementById("selectorSemana");
@@ -34,14 +34,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const tablaResumenBody = document.querySelector("#tablaResumen tbody");
 
-  // Objeto donde guardamos los datos de las semanas
+  
   let semanasGuardadas = {};
 
-  // Función para llenar el selector según el número ingresado
+  
   function llenarSelectorSemanas(cantidad) {
     selectorSemana.innerHTML = "";
 
-    // Opción inicial por defecto
+    
     const opcionDefault = document.createElement("option");
     opcionDefault.value = "";
     opcionDefault.textContent = "Seleccionar semana";

@@ -1,6 +1,6 @@
 
 
-// Estado temporal para sistema
+
 var rutinaTemporal = { usuarioID: null };
 
 //
@@ -71,14 +71,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // buscador de ejercicios 
 
-// Esta función carga la lista en el datalist
+//  carga la lista en el datalist
 // Obtener todos los ejercicios combinados
 function obtenerTodosLosEjercicios() {
   const guardados = obtenerEjerciciosDesdeLocalStorage();
   return [...ejerciciosPredefinidos, ...guardados];
 }
 
-// Escuchar cuando se elige un ejercicio
+
 
 document.addEventListener("DOMContentLoaded", () => {
   poblarListaDeEjercicios();
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     agregarEjercicioALaLista(ejercicioEncontrado);
-    e.target.value = ""; // Limpiar input después de seleccionar
+    e.target.value = ""; 
   });
 });
 
