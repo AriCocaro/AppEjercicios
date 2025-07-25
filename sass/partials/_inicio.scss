@@ -1,0 +1,31 @@
+@use "./variables" as vars;
+
+main{
+    .inicio{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        h1{
+            text-align: center;
+        }
+
+        align-items: center;
+
+    }
+
+    .botonesInd{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 10px;
+        padding: 10px;
+        gap: 10px;
+        a{
+            
+            min-width: 200px;
+        }
+      
+    }
+    
+  
+}

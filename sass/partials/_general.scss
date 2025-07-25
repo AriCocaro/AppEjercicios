@@ -1,5 +1,11 @@
 @use "./variables" as vars ;
 
+body{
+    background-color: vars.$Negro ;
+    font-family: vars.$fuente ;
+    color: vars.$Blanco;
+}
+
 header {
   width: 100%;
   top: 0;
@@ -32,3 +38,44 @@ header {
         }
     }
 }
+
+
+main{
+  
+  display: flex;
+  flex-direction: column;
+  
+  justify-content: center;
+  h1{
+    text-align: center;
+ }
+
+ align-items: center;
+
+
+}
+  
+
+.btn-primary {
+  background-color: vars.$Amarillo;
+  color: vars.$Negro;
+}
+
+.btn-primary:hover {
+  background-color: darken(vars.$Negro, 10%);
+  color: vars.$Amarillo;
+  border-color: vars.$Blanco;
+
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  background-color: vars.$Negro;
+  width: 100%;
+}
+
+

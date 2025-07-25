@@ -1,4 +1,10 @@
 /*Paleta de colores*/
+body {
+  background-color: black;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+
 header {
   width: 100%;
   top: 0;
@@ -28,11 +34,47 @@ header .Encabezado figure .LogoInst {
   padding: 10px;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+main h1 {
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: rgb(225, 202, 58);
+  color: black;
+}
+
+.btn-primary:hover {
+  background-color: black;
+  color: rgb(225, 202, 58);
+  border-color: white;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  background-color: black;
+  width: 100%;
+}
+
 .generales {
-  background-color: aqua;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  color: black;
+  gap: 10px;
+  min-width: 600px;
+  margin-bottom: 1rem;
+  color: white;
 }
 
 .dropdown-usuarios {
@@ -43,8 +85,8 @@ header .Encabezado figure .LogoInst {
   max-height: 150px;
   overflow-y: auto;
   position: absolute;
+  width: 30%;
   background-color: white;
-  width: 100%;
   z-index: 1000;
 }
 
@@ -59,6 +101,84 @@ header .Encabezado figure .LogoInst {
 
 .oculto {
   display: none;
+}
+
+#semana {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 30px;
+  left: 10px;
+  right: 10px;
+  gap: 10px;
+}
+#semana #tablaResumen {
+  border-collapse: separate;
+  border-spacing: 20px 10px;
+  width: 80%;
+  text-align: center;
+}
+#semana #tablaResumen th td {
+  padding: 10px;
+}
+
+#armadoDeRutina {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#armadoDeRutina ul {
+  list-style: none;
+}
+
+main .inicio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+main .inicio h1 {
+  text-align: center;
+}
+main .botonesInd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+  gap: 10px;
+}
+main .botonesInd a {
+  min-width: 200px;
+}
+
+.agregarEjercicio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  text-align: center;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.listaDeEjercicios {
+  max-width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.listaDeEjercicios .mb-3 {
+  min-width: 500px;
+}
+.listaDeEjercicios .cardsEjercicios {
+  text-transform: capitalize;
 }
 
 /*# sourceMappingURL=estilo.css.map */

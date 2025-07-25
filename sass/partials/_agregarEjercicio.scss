@@ -1,0 +1,26 @@
+@use "./variables" as vars;
+
+.agregarEjercicio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.listaDeEjercicios{
+    max-width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .mb-3{
+        min-width: 500px;
+    }
+
+    .cardsEjercicios{
+        text-transform: capitalize;
+    }
+}
