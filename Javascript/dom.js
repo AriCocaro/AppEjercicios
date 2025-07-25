@@ -153,4 +153,58 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// ejercicios por dia 
+// vista previa de los dias 
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btnVistaFlotante = document.getElementById("vistaFlotante");
+  const contenedorVistaFlotante = document.getElementById("vistaFlotanteContenido");
+
+  btnVistaFlotante.addEventListener("click", () => {
+    // Alternar visibilidad
+    const visible = contenedorVistaFlotante.style.display === "block";
+    contenedorVistaFlotante.style.display = visible ? "none" : "block";
+
+    if (!visible) {
+      mostrarVistaPreviaFlotante(); // Solo actualiza si se va a mostrar
+    }
+  });
+
+  function mostrarVistaPreviaFlotante() {
+    const usuarioId = rutinaTemporal?.usuarioID;
+    const rutinaId = rutinaTemporal?.rutinaId;
+    const rutinas = obtenerRutinasDesdeStorage();
+
+    contenedorVistaFlotante.innerHTML = "";
+
+    if (!usuarioId || !rutinaId || !rutinas[usuarioId]?.rutinas?.[rutinaId]?.dias) {
+      contenedorVistaFlotante.innerHTML = "<p>No hay ejercicios cargados.</p>";
+      return;
+    }
+
+    const dias = rutinas[usuarioId].rutinas[rutinaId].dias;
+
+    Object.entries(dias).forEach(([dia, ejercicios]) => {
+      const diaContainer = document.createElement("div");
+      diaContainer.style.marginBottom = "10px";
+
+      const titulo = document.createElement("strong");
+      titulo.textContent = `Día ${dia}`;
+      diaContainer.appendChild(titulo);
+
+      const lista = document.createElement("ul");
+      lista.style.margin = "4px 0";
+
+      ejercicios.forEach(ej => {
+        const item = document.createElement("li");
+        item.textContent = ej.nombre || "Ejercicio sin nombre";
+        lista.appendChild(item);
+      });
+
+      diaContainer.appendChild(lista);
+      contenedorVistaFlotante.appendChild(diaContainer);
+    });
+  }
+});

@@ -16,12 +16,12 @@
 
 
     <!--JS-->
-    <script src="../javascript/dataprecarga.js"></script>
-    <script src="../javascript/utils.js"></script>
-    <script src="../javascript/storage.js"></script>
-    <script src="../javascript/ejercicios.js"></script>
-    <script src="../javascript/rutinas.js"> </script>
-    <script src="../javascript/dom.js"></script>
+    <script src="../javascript/dataprecarga.js" ></script>
+    <script src="../javascript/utils.js" ></script>
+    <script src="../javascript/storage.js" ></script>
+    <script src="../javascript/ejercicios.js" ></script>
+    <script src="../javascript/rutinas.js" defer > </script>
+    <script src="../javascript/dom.js" ></script>
     <script src="../javascript/main.js" defer></script>
 
     <link rel="stylesheet" href="../css/estilo.css">
@@ -56,14 +56,14 @@
             <input type="number"   id="semanaNro" min="1">
             
 
-            <button id="guardar" class="btn btn-primary"   data-id="gdg">Guardar datos generales</button>
+            <button id="guardarGenerales" class="btn btn-primary"  >Guardar datos generales</button>
         </div>
 
     </section>
 
     <section id="semana">
         <h1> Datos Semanales</h1>
-        <select id="selectorSemana">Semana </select>
+        <select id="selectorSemana" onchange="guardarSemana()">Semana </select>
 
         
         <label for="series">Series</label>
@@ -87,7 +87,7 @@
          <tbody></tbody>
      </table>
 
-       <button id="guardar"   class="btn btn-primary" data-id="gds" >Guardar semanas</button>
+       <button id="guardarSemana"   class="btn btn-primary"  >Guardar semanas</button>
 
     </section>
 
@@ -106,22 +106,22 @@
 
         </ul>
 
-        <button id="guardar"   class="btn btn-primary" data-id="gd">Guardar dia</button>
+        <button id="guardarDia"   class="btn btn-primary" >Guardar dia</button>
 
     </section>
 
-    <div id="botonVP">
-        <button id="vistaFlotante" title="Mantener para vista previa">VP</button>
 
-    </div>
-    <section id="VistaPrevia">
-        <h2>Vista previa general</h2>
-        <div id="VPTodosLosDias"></div>
+    <section class="vistaPrevia">
+        <div id="botonVP">
+            <button id="vistaFlotante" class="btn btn-primary"  title="Mantener para vista previa">VP</button>
+
+        </div>
+
+        <div id="vistaFlotanteContenido" ></div>
     </section>
-    
 
   </main>
-  <footer>
+<footer>
     <div class="pie">
         <h5>Sabemos lo que hacemos</h5>
 
