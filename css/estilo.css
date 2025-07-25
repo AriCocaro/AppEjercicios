@@ -35,6 +35,10 @@ header .Encabezado figure .LogoInst {
   padding: 10px;
 }
 
+.topnav {
+  color: rgb(225, 202, 58);
+}
+
 main {
   display: flex;
   flex-direction: column;
